@@ -19,10 +19,10 @@ def main():
 
     # 2. 设置LLM API Key和API Base URL
     # 替换为您的SiliconFlow API Key
-    os.environ["SILICONFLOW_API_KEY"] = "YOUR_SILICONFLOW_API_KEY"
+    # os.environ["SILICONFLOW_API_KEY"] = "YOUR_SILICONFLOW_API_KEY"
     # 或者其他兼容OpenAI API的服务商URL
-    os.environ["LLM_API_BASE"] = "https://api.siliconflow.cn/v1/"
-    os.environ["LLM_MODEL_NAME"] = "mistralai/mixtral-8x7b-instruct-v0.1"  # 检查模型名称
+    # os.environ["LLM_API_BASE"] = "https://api.siliconflow.cn/v1/"
+    # os.environ["LLM_MODEL_NAME"] = "mistralai/mixtral-8x7b-instruct-v0.1"  # 检查模型名称
 
     sf_api_key = os.getenv("SILICONFLOW_API_KEY")
     sf_api_base = os.getenv("LLM_API_BASE", "https://api.siliconflow.cn/v1/")  # 默认SiliconFlow

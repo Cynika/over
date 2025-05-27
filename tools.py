@@ -33,7 +33,6 @@ class Tool:
         """执行工具函数，并尝试用args_schema验证参数"""
         if self.args_schema:
             try:
-                # 使用 Pydantic v2 的模型验证
                 validated_args = self.args_schema(**kwargs).model_dump()
                 return self.func(**validated_args)
             except ValidationError as e:
@@ -53,16 +52,14 @@ class Tool:
             }
         }
         if self.args_schema:
-            # Pydantic v2: 使用 model_json_schema()
             schema = self.args_schema.model_json_schema()
             function_def["parameters"]["properties"] = schema.get("properties", {})
             function_def["parameters"]["required"] = schema.get("required", [])
         return function_def
 
 
-# 定义SQL查询工具的参数 (Pydantic v2)
+# 定义SQL查询工具的参数
 class SQLQueryParams(BaseModel):
-    # Field() 在 Pydantic v2 中仍然可以使用，但通常推荐直接类型注解
     # query: str = Field(description="The SQL query to execute...")
     query: str = Field(
         description="The SQL query to execute against the call records database. Ensure the query is valid SQLite syntax. The table name is 'call_records'.")
@@ -78,7 +75,7 @@ sql_query_tool = Tool(
 )
 
 
-# 定义获取表结构工具的参数 (Pydantic v2)
+# 定义获取表结构工具的参数
 class DescribeTableParams(BaseModel):
     table_name: str = Field(description="The name of the table to describe. Only 'call_records' is available.")
 
